@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusMate - Smart Student Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="brand">
+            <h1>🎓 CampusMate</h1>
+            <p>Smart Student Planner</p>
+        </div>
+        <button id="themeBtn" class="theme-btn">🌙 Dark Mode</button>
+    </header>
+
+    <nav class="navbar">
+        <button class="nav-btn active" data-section="home">Dashboard</button>
+        <button class="nav-btn" data-section="timetable">Timetable</button>
+        <button class="nav-btn" data-section="assignments">Assignments</button>
+        <button class="nav-btn" data-section="todo">To-Do List</button>
+        <button class="nav-btn" data-section="calendar">Weekly Calendar</button>
+        <button class="nav-btn" data-section="history">History</button>
+        <button class="nav-btn" data-section="focus">Focus Timer</button>
+    </nav>
+
+    <main>
+
+        <!-- DASHBOARD -->
+        <section id="home" class="section">
+
+            <div class="welcome">
+                <h2>Welcome to CampusMate! 👋</h2>
+                <p>Organize your academic life in one place.</p>
+                <p id="todayDate"></p>
+            </div>
+
+            <div class="stats">
+
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <h3>Total Classes</h3>
+                    <p id="classCount">0</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">📝</div>
+                    <h3>Assignments</h3>
+                    <p id="assignmentCount">0</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <h3>Daily Tasks</h3>
+                    <p id="taskCount">0</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <h3>Completed</h3>
+                    <p id="completedCount">0</p>
+                </div>
+
+            </div>
+
+            <div class="card">
+                <h3>📈 Overall Progress</h3>
+                <div class="progress-track">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+                <p id="progressText">0% completed</p>
+            </div>
+
+            <div class="card">
+                <h3>⏰ Upcoming Deadlines</h3>
+                <ul id="upcomingList" class="list"></ul>
+            </div>
+
+            <div class="card">
+                <h3>💡 Student Tip</h3>
+                <p>Plan your day, complete your tasks, and achieve your goals!</p>
+            </div>
+
+            <button id="clearDataBtn" class="danger-btn">
+                🗑️ Clear All Data
+            </button>
+
+        </section>
+
+        <!-- TIMETABLE -->
+        <section id="timetable" class="section hidden">
+
+            <div class="card">
+                <h2>📚 My Timetable</h2>
+
+                <form id="classForm">
+
+                    <input type="text" id="subject"
+                           placeholder="Subject Name" required>
+
+                    <select id="classDay" required>
+                        <option value="">Select Day</option>
+                        <option>Monday</option>
+                        <option>Tuesday</option>
+                        <option>Wednesday</option>
+                        <option>Thursday</option>
+                        <option>Friday</option>
+                        <option>Saturday</option>
+                        <option>Sunday</option>
+                    </select>
+
+                    <input type="time" id="classTime" required>
+
+                    <button type="submit">➕ Add Class</button>
+
+                </form>
+
+                <ul id="classList" class="list"></ul>
+
+            </div>
+
+        </section>
+
+        <!-- ASSIGNMENTS -->
+        <section id="assignments" class="section hidden">
+
+            <div class="card">
+                <h2>📝 Assignments</h2>
+
+                <form id="assignmentForm">
+
+                    <input type="text" id="assignmentTitle"
+                           placeholder="Assignment Name" required>
+
+                    <input type="text" id="assignmentSubject"
+                           placeholder="Subject Name" required>
+
+                    <input type="date" id="assignmentDate" required>
+
+                    <select id="assignmentPriority">
+                        <option value="Medium">Medium Priority</option>
+                        <option value="High">High Priority</option>
+                        <option value="Low">Low Priority</option>
+                    </select>
+
+                    <button type="submit">➕ Add Assignment</button>
+
+                </form>
+
+                <input type="text" id="assignmentSearch"
+                       class="search" placeholder="🔍 Search assignments">
+
+                <ul id="assignmentList" class="list"></ul>
+
+            </div>
+
+        </section>
+
+        <!-- TO-DO -->
+        <section id="todo" class="section hidden">
+
+            <div class="card">
+                <h2>✅ Daily To-Do List</h2>
+
+                <form id="taskForm">
+
+                    <input type="text" id="taskTitle"
+                           placeholder="Enter your task" required>
+
+                    <input type="date" id="taskDate">
+
+                    <select id="taskPriority">
+                        <option value="Medium">Medium Priority</option>
+                        <option value="High">High Priority</option>
+                        <option value="Low">Low Priority</option>
+                    </select>
+
+                    <button type="submit">➕ Add Task</button>
+
+                </form>
+
+                <input type="text" id="taskSearch"
+                       class="search" placeholder="🔍 Search tasks">
+
+                <ul id="taskList" class="list"></ul>
+
+            </div>
+
+        </section>
+
+        <!-- WEEKLY CALENDAR -->
+        <section id="calendar" class="section hidden">
+
+            <div class="card">
+                <h2>📅 Weekly Calendar</h2>
+                <p>View your classes and upcoming deadlines.</p>
+                <div id="calendarGrid" class="calendar-grid"></div>
+            </div>
+
+        </section>
+
+        <!-- HISTORY -->
+        <section id="history" class="section hidden">
+
+            <div class="card">
+                <h2>🏆 Completed History</h2>
+                <p>Completed assignments and tasks.</p>
+                <ul id="historyList" class="list"></ul>
+            </div>
+
+        </section>
+
+        <!-- FOCUS TIMER -->
+        <section id="focus" class="section hidden">
+
+            <div class="card timer-card">
+
+                <h2>⏳ Focus Timer</h2>
+
+                <p>Concentrate on your studies without distractions.</p>
+
+                <div class="timer-presets">
+                    <button data-minutes="25">25 Min Focus</button>
+                    <button data-minutes="5">5 Min Break</button>
+                    <button data-minutes="15">15 Min Break</button>
+                </div>
+
+                <div id="timerDisplay" class="timer-display">
+                    25:00
+                </div>
+
+                <div class="timer-controls">
+                    <button id="startTimer">▶️ Start</button>
+                    <button id="pauseTimer">⏸️ Pause</button>
+                    <button id="resetTimer">↻ Reset</button>
+                </div>
+
+                <p id="timerMessage">Ready to focus!</p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <footer>
+        <p>© 2026 CampusMate | Smart Student Planner</p>
+        <p>Designed to help students manage academic activities.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
